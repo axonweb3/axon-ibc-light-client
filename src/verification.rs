@@ -13,7 +13,7 @@ use ibc_proto::ibc::core::commitment::v1::MerkleProof as RawMerkleProof;
 use ibc_proto::ics23::commitment_proof::Proof;
 use overlord::types::{Vote, VoteType};
 
-use crate::{header::Header, AxonClient};
+use crate::header::Header;
 
 // core/consensus/src/adapter.rs: 431L
 pub(crate) fn verify_header(header: &Header) -> Result<(), Ics02Error> {

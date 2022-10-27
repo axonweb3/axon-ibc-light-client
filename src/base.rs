@@ -1,6 +1,8 @@
 use axon_protocol::types::MerkleRoot;
 use ibc::core::{ics02_client::height::Height, ics23_commitment::commitment::CommitmentRoot};
 
+pub static AXON_CLIENT_TYPE: &'static str = "Axon";
+
 #[derive(Debug, Clone, Copy)]
 pub struct AxonHeight(u64);
 

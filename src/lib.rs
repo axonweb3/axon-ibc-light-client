@@ -5,7 +5,7 @@ mod verification;
 
 use std::time::Duration;
 
-use base::{AxonHash, AxonHeight};
+use base::{AxonHash, AxonHeight, AXON_CLIENT_TYPE};
 use ibc::core::ics02_client::client_state::{ClientState, UpdatedState, UpgradeOptions};
 use ibc::core::ics02_client::client_type::ClientType;
 use ibc::core::ics02_client::consensus_state::ConsensusState;
@@ -65,8 +65,7 @@ impl ClientState for AxonClient {
     }
 
     fn client_type(&self) -> ClientType {
-        // Fix after this issue finish: https://github.com/cosmos/ibc-rs/issues/188
-        ClientType::Tendermint
+        ClientType::new(AXON_CLIENT_TYPE)
     }
 
     fn latest_height(&self) -> Height {
@@ -344,7 +343,7 @@ impl From<AxonClient> for Any {
 fn downcast_axon_client_state(cs: &dyn ClientState) -> Result<&AxonClient, Ics02Error> {
     cs.as_any()
         .downcast_ref::<AxonClient>()
-        .ok_or_else(|| Ics02Error::client_args_type_mismatch(ClientType::Tendermint))
+        .ok_or_else(|| Ics02Error::client_args_type_mismatch(ClientType::new(AXON_CLIENT_TYPE)))
 }
 
 fn downcast_axon_consensus_state(
@@ -352,6 +351,6 @@ fn downcast_axon_consensus_state(
 ) -> Result<AxonConsensusState, Ics02Error> {
     cs.as_any()
         .downcast_ref::<AxonConsensusState>()
-        .ok_or_else(|| Ics02Error::client_args_type_mismatch(ClientType::Tendermint))
+        .ok_or_else(|| Ics02Error::client_args_type_mismatch(ClientType::new(AXON_CLIENT_TYPE)))
         .map(Clone::clone)
 }

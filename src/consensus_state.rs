@@ -11,18 +11,17 @@ use ibc_proto::{google::protobuf::Any, protobuf::Protobuf};
 use serde::{Deserialize, Serialize};
 use tendermint::Time;
 
-use crate::header::Header;
+use crate::{base::AXON_CLIENT_TYPE, header::Header};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct AxonConsensusState {
     pub timestamp: Time,
-    pub root:      CommitmentRoot,
+    pub root: CommitmentRoot,
 }
 
 impl ConsensusState for AxonConsensusState {
     fn client_type(&self) -> ClientType {
-        // FIXME
-        ClientType::Tendermint
+        ClientType::new(AXON_CLIENT_TYPE)
     }
 
     fn root(&self) -> &CommitmentRoot {
