@@ -1,0 +1,18 @@
+[package]
+name = "axon-ibc-light-client"
+version = "0.1.0"
+authors = ["Nervos Dev <dev@nervos.org>"]
+edition = "2021"
+
+[dependencies]
+axon-protocol = { git = "https://github.com/axonweb3/axon" }
+cita_trie = "3.0"
+common-crypto = { git = "https://github.com/axonweb3/axon" }
+ibc = "0.21"
+ibc-proto = "0.21"
+overlord = "0.4"
+prost = "0.11"
+rlp = "0.5"
+serde = { version = "1.0", features = ["derive"] }
+tendermint = "0.25"
+hasher = "0.1"
